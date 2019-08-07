@@ -16,7 +16,7 @@ Use Google Sheets as a datastore for your app with easy data management.
 
 ## Example
 ```python
-from sheetsdb import sheetsDb
+from sheetsDb import *
 
 creds = {
     "type": "XXXXXXXXXXXXXXXXXXX",
@@ -28,12 +28,18 @@ creds = {
     "auth_uri": "XXXXXXXXXXXXXXXXXXX",
     "token_uri": "XXXXXXXXXXXXXXXXXXX",
     "auth_provider_x509_cert_url": "XXXXXXXXXXXXXXXXXXX",
-    "client_x509_cert_url": "XXXXXXXXXXXXXXXXXXXm"
+    "client_x509_cert_url": "XXXXXXXXXXXXXXXXXXX"
 }
 
 sheetsObj = sheetsDb(creds)
-sheetsObj.connectDb("google sheet url here")
-sheetsObj.createTable("New Table",["header1","header2"])
-sheetsObj.addItemByColumn("Table1","ColumnName",["col1","col2"])
-sheetsObj.deleteItemByColumn("Table1","ColumnName","SearchItem")
+sheetsObj.connectDb("https://docs.google.com/spreadsheets/d/1k2ypyks7-4EpZmsRHBHOSm4KfplTgFFZD-SciA45DFQ")
+sheetsObj.createTable("User Details",["First Name","Last Name"])
+sheetsObj.save("User Details",["Aswin","VB"])
+sheetsObj.save("User Details",["John","Doe"])
+sheetsObj.save("User Details",["Leonardo","Dicaprio"])
+data=sheetsObj.findAll("User Details")
+item=sheetsObj.findOneByColumn("User Details","First Name","Aswin")
+sheetsObj.deleteOneByColumn("User Details","First Name","Aswin")
+sheetsObj.deleteAll("User Details")
+sheetsObj.deleteTable("User Details")
 ```

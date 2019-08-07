@@ -1,0 +1,6 @@
+README.md
+setup.py
+sheetsDb.egg-info/PKG-INFO
+sheetsDb.egg-info/SOURCES.txt
+sheetsDb.egg-info/dependency_links.txt
+sheetsDb.egg-info/top_level.txt

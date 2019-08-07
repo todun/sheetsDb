@@ -6,6 +6,14 @@ Use Google Sheets as a datastore for your app with easy data management.
 - Obtain google account credentials from [Google Developer Console](https://console.developers.google.com/project)
 - follow the example below to use sheetsDb
 
+## Functionalities
+- Create a connection to database 
+- Create a table with column names
+- Add a new entry to any table in the database
+- delete any entry from a table by matching column values
+- find any entry from a table by matching column values
+- get all entries in the table
+
 ## Example
 ```python
 from sheetsdb import sheetsDb

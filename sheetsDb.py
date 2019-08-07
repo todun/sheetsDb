@@ -25,29 +25,60 @@ class sheetsDb:
         except:
             print("Please Check Table Name! Make sure the table does not exist")
 
-    def addRow(self,table,row):
+    def deleteTable(self,table):
+        try:
+            worksheet = self.sheet.worksheet(table)
+            self.sheet.del_worksheet(worksheet)
+            return True
+        except:
+            return False
+
+    def save(self,table,row):
         worksheet = self.sheet.worksheet(table)
         data = worksheet.get_all_values()
         lastRow = len(data)
         colLen = len(row)-1
-        cell_list = worksheet.range('A'+str(lastRow+2)+':'+chr(65+colLen)+str(lastRow+2))
+        cell_list = worksheet.range('A'+str(lastRow+1)+':'+chr(65+colLen)+str(lastRow+1))
         i=0
         for cell in cell_list:
             cell.value = row[i]
             i=i+1    
         worksheet.update_cells(cell_list)
     
-    def getRow(self,table,row):
+    def findRowByNumber(self,table,row):
         worksheet = self.sheet.worksheet(table)
         rowData = worksheet.row_values(row)
         return rowData
     
-    def getAll(self,table):
+    def count(self,table):
         worksheet = self.sheet.worksheet(table)
         data = worksheet.get_all_values()
+        return len(data)-1
+
+    def findAll(self,table):
+        worksheet = self.sheet.worksheet(table)
+        data = worksheet.get_all_values()
+        del data[0]
         return data
 
-    def findItemByColumn(self,column,item):
+    def deleteAll(self,table):
+        try:
+            worksheet = self.sheet.worksheet(table)
+            rowData = worksheet.row_values(1)
+            self.sheet.del_worksheet(worksheet)
+            worksheet = self.sheet.add_worksheet(title=table, rows="100", cols="20")
+            colLen=len(rowData)-1
+            cell_list = worksheet.range('A1:'+chr(65+colLen)+'1')
+            i=0
+            for cell in cell_list:
+                cell.value = rowData[i]
+                i=i+1    
+            worksheet.update_cells(cell_list)
+            return True
+        except:
+            False
+
+    def findOneByColumn(self,table,column,item):
         worksheet = self.sheet.worksheet(table)
         header = worksheet.row_values(1)
         i=0
@@ -61,7 +92,7 @@ class sheetsDb:
                 return row
         return None
 
-    def deleteItemByColumn(self,table,column,item):
+    def deleteOneByColumn(self,table,column,item):
         worksheet = self.sheet.worksheet(table)
         header = worksheet.row_values(1)
         i=0

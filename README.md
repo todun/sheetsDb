@@ -1,0 +1,31 @@
+# SheetsDb
+Use Google Sheets as a datastore for your app with easy data management.
+
+## How To Use?
+- `pip install sheetsdb`
+- Obtain google account credentials from [Google Developer Console](https://console.developers.google.com/project)
+- follow the example below to use sheetsDb
+
+## Example
+```python
+from sheetsdb import sheetsDb
+
+creds = {
+    "type": "XXXXXXXXXXXXXXXXXXX",
+    "project_id": "XXXXXXXXXXXXXXXXXXX",
+    "private_key_id": "XXXXXXXXXXXXXXXXXXX",
+    "private_key": "XXXXXXXXXXXXXXXXXXX",
+    "client_email": "XXXXXXXXXXXXXXXXXXX",
+    "client_id": "XXXXXXXXXXXXXXXXXXX",
+    "auth_uri": "XXXXXXXXXXXXXXXXXXX",
+    "token_uri": "XXXXXXXXXXXXXXXXXXX",
+    "auth_provider_x509_cert_url": "XXXXXXXXXXXXXXXXXXX",
+    "client_x509_cert_url": "XXXXXXXXXXXXXXXXXXXm"
+}
+
+sheetsObj = sheetsDb(creds)
+sheetsObj.connectDb("google sheet url here")
+sheetsObj.createTable("New Table",["header1","header2"])
+sheetsObj.addItemByColumn("Table1","ColumnName",["col1","col2"])
+sheetsObj.deleteItemByColumn("Table1","ColumnName","SearchItem")
+```

@@ -4,9 +4,9 @@ import requests
 import sys
 
 class sheetsDb:
-    def __init__(self):        
+    def __init__(self,creds):        
         scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-        credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds, scope)
         self.sheetService = gspread.authorize(credentials)
 
     def connectDb(self,url):
